@@ -6,7 +6,7 @@ It includes the modules that are able to configure PAS-K machine's settings.
 This collection is distributed via [ansible-galaxy](https://galaxy.ansible.com/), the installation steps are as follows:
 
 1. Install or upgrade to Ansible 2.9+
-2. Download this collection from galaxy: `ansible-galaxy collection install piolink.pask_ansible_collection`
+2. Download this collection from galaxy: `ansible-galaxy collection install piolink_yhoh.pask_test`
 
 # Requirements
 * Ansible 2.9+ is required to support the newer Ansible Collections format
