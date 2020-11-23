@@ -88,7 +88,7 @@ RETURN = r'''
 
 import json
 from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_module import PaskModule
+    pask_module import PaskModule, try_except
 
 
 module_args = dict(
@@ -104,6 +104,7 @@ class PaskPrest(PaskModule):
     def __init__(self, name, module_args):
         super(PaskPrest, self).__init__(name, module_args)
 
+    @try_except
     def run(self):
         resp = None
         rest_method = ['get', 'post', 'put', 'delete']
