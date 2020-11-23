@@ -362,11 +362,10 @@ EXAMPLES = r'''
           - { ip: "172.118.10.122" }
       priority: "25"
       nat_mode: "dnat"
-      lan_to_lan: "10.10.10.10/24"
       lb_method: "wlc"
       real:
-          - { id: "10", rport: "5512", status: "enable", graceful_shutdown: "disable"}
-          - id: "14"
+          - { id: "10", rport: "5512", status: "enable", graceful_shutdown: "disable" }
+          - { id: "14" }
       health_check:
           - "100"
           - "200"
@@ -375,12 +374,13 @@ EXAMPLES = r'''
           timer: "444"
       sticky:
           time: "4121"
-          source_subnet: "27"
+          source_subnet: "255.255.255.0"
       session_sync: "persistence"
       fail_skip: "inact"
-      keep_backup: "disable"
+      keep_backup:
+          service: "disable"
+          real: "disable"
       status: "disable"
-      snatip: "14.14.14.14"
       state: "present"
 
   - name: Delete slb
