@@ -18,12 +18,6 @@ from ansible.module_utils._text import to_bytes
 from ansible.module_utils.basic import AnsibleModule, missing_required_lib
 
 
-OP_GET = 0
-OP_POST = 1
-OP_PUT = 2
-OP_DELETE = 3
-
-
 class PrestApi(object):
     def __init__(self):
         self.headers = {'Authorization': '',
