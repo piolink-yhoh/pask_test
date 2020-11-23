@@ -1,0 +1,49 @@
+---
+- name: Create slb Test
+  hosts: all
+  connection: local
+  collections:
+  - piolink_yhoh.pask_test
+
+  tasks:
+  - name: Create slb
+    pask_slb:
+      prest_ip: "{{ansible_host}}"
+      prest_port: "{{ansible_port}}"
+      user_id: "{{user_id}}"
+      user_pw: "{{user_pw}}"
+      name: "slb_test"
+      vip:
+          - { ip: "172.118.10.111", protocol: { protocol: "icmp", vport: "1231" }}
+          - { ip: "172.118.10.122" }
+      priority: "25"
+      nat_mode: "dnat"
+      lan_to_lan: "10.10.10.10/24"
+      lb_method: "wlc"
+      real:
+          - { id: "10", rport: "5512", status: "enable", graceful_shutdown: "disable"}
+          - id: "14"
+      health_check:
+          - "100"
+          - "200"
+      slow_start:
+          rate: "7"
+          timer: "444"
+      sticky:
+          time: "4121"
+          source_subnet: "27"
+      session_sync: "persistence"
+      fail_skip: "inact"
+      keep_backup: "disable"
+      status: "disable"
+      snatip: "14.14.14.14"
+      state: "present"
+
+  - name: Delete slb
+    pask_slb:
+        prest_ip: "{{ansible_host}}"
+        prest_port: "{{ansible_port}}"
+        user_id: "{{user_id}}"
+        user_pw: "{{user_pw}}"
+        name: "slb_test"
+        state: "absent"

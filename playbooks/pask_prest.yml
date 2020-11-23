@@ -1,0 +1,21 @@
+---
+- name: Prest Test
+  hosts: all
+  connection: local
+  collections:
+  - piolink_yhoh.pask_test
+
+  tasks:
+  - name: Configure terminal setting
+    pask_prest:
+      prest_ip: "{{ansible_host}}"
+      prest_port: "{{ansible_port}}"
+      user_id: "{{user_id}}"
+      user_pw: "{{user_pw}}"
+      uri: "/prestapi/v2/conf/terminal"
+      data: >
+            {
+                "timeout" : "60",
+                "length" : "80"
+            }
+      method: "put"

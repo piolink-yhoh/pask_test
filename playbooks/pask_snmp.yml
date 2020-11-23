@@ -1,0 +1,34 @@
+---
+- name: SNMP Test
+  hosts: all
+  connection: local
+  collections:
+  - piolink_yhoh.pask_test
+
+  tasks:
+  - name: Create snmp
+    pask_snmp:
+      prest_ip: "{{ansible_host}}"
+      prest_port: "{{ansible_port}}"
+      user_id: "{{user_id}}"
+      user_pw: "{{user_pw}}"
+      status: "enable"
+      load_timeout: "65535"
+      system:
+        name: "Piolink"
+        contact: "admin@piolink.com"
+        location: "Korea"
+      community:
+        - { name: "piolink", policy: "read-write", limit_oid: "1.1.1.1" }
+        - { name: "piolink2", policy: "read-only", limit_oid: "1.1.1.1" }
+      user:
+        - { name: "test1", sha_passwd: "tester123!@#"}
+      trap:
+        link_up: "enable"
+        link_down: "disable"
+        failover: "enable"
+        fan: "enable"
+        cold_start: "enable"
+        host:
+          - {ip: "2.2.2.2", version: "3", user: "piolink", engine_id: "800007E5804089071BC6D10A41", aes_passwd: "Admin123$", sha_passwd: "Admin123$"}
+          - {ip: "3.3.3.3", version: "3", user: "piolink12", engine_id: "800007E5804089071BC6D10A41", aes_passwd: "Admin123$", sha_passwd: "Admin123$"}

@@ -1,0 +1,15 @@
+---
+- name: Reset Test
+  hosts: all
+  connection: local
+  collections:
+  - piolink_yhoh.pask_test
+
+  tasks:
+  - name: Reset Config
+    pask_user:
+      prest_ip: "{{ansible_host}}"
+      prest_port: "{{ansible_port}}"
+      user_id: "{{user_id}}"
+      user_pw: "{{user_pw}}"
+      verify: "yes"
