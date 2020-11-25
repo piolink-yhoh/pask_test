@@ -202,8 +202,8 @@ RETURN = r'''
 #
 '''
 
-from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_module import PaskModule, make_module_args, try_except
+from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
+    make_module_args, try_except
 import os
 
 
@@ -248,7 +248,7 @@ class PaskInterface(PaskModule):
     def run(self):
         data = self.make_data(self.module.params, include_inner=True)
         url = os.path.join(self.url, self.module.params['name'])
-        if self.module_params['state'] == 'absent':
+        if self.module.params['state'] == 'absent':
             self.ok_error_msg['delete'] = ['There is no']
             self.resp = self.delete(url, data)
         else:
