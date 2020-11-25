@@ -87,8 +87,8 @@ RETURN = r'''
 '''
 
 import json
-from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_module import PaskModule, try_except
+from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
+    try_except
 
 
 module_args = dict(

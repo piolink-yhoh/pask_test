@@ -92,8 +92,8 @@ RETURN = r'''
 #
 '''
 
-from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_module import PaskModule, make_module_args, try_except
+from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
+    make_module_args, try_except
 
 mostouter_params = [
     'status', 'primary_server', 'secondary_server', 'minpoll',

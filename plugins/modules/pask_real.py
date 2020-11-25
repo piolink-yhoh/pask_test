@@ -252,8 +252,8 @@ RETURN = r'''
 #
 '''
 
-from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_module import PaskModule, try_except, make_module_args
+from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
+    try_except, make_module_args
 import os
 
 

@@ -150,8 +150,8 @@ except ImportError:
 
 import json
 from ansible.module_utils.basic import missing_required_lib
-from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_module import PaskModule, make_module_args, try_except
+from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
+    make_module_args, try_except
 
 inner_interface_params = ['interface']
 inner_interface_args = make_module_args(inner_interface_params)
