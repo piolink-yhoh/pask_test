@@ -146,6 +146,7 @@ options:
             id:
                 description:
                     - Enter the id of the nat rule.
+                required: true
                 type: str
             type:
                 description:
@@ -258,10 +259,13 @@ import os
 
 
 inner_nat_param = [
-    'id', 'type', 'priority', 'sip', 'dip', 'protocol', 'natip', 'status',
+    'type', 'priority', 'sip', 'dip', 'protocol', 'natip', 'status',
     'external_ip', 'internal_ip'
 ]
-inner_nat_args = make_module_args(inner_nat_param)
+inner_nat_args = dict(
+    id=dict(type='str', required=True),
+)
+inner_nat_args.update(make_module_args(inner_nat_param))
 
 inner_hc_args = dict(
     id=dict(type='str', required=True),
