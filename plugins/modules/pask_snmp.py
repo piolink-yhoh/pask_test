@@ -77,10 +77,6 @@ options:
                         description:
                             - Enter the SHA password for snmp version '3'.
                         type: str
-                    sha256_passwd:
-                        description:
-                            - Enter the SHA256 password for snmp version '3'.
-                        type: str
                     aes_passwd:
                         description:
                             - Enter the AES passowrd for snmp version '3'.
@@ -199,10 +195,6 @@ options:
                 description:
                     - Enter the SHA passowrd.
                 type: str
-            sha256_passwd:
-                description:
-                    - Enter the SHA256 passowrd.
-                type: str
             aes_passwd:
                 description:
                     - Enter the AES passowrd.
@@ -287,7 +279,7 @@ from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module
 
 
 passwd_params_str = [
-    'des_passwd', 'md5_passwd', 'sha_passwd', 'sha256_passwd', 'aes_passwd'
+    'des_passwd', 'md5_passwd', 'sha_passwd', 'aes_passwd'
 ]
 passwd_args = dict()
 for p in passwd_params_str:
