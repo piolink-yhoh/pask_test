@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (c) 2020, Piolink.Inc.
+# Copyright: (c) 2020, Piolink Inc.
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -122,8 +122,8 @@ EXAMPLES = r'''
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       default_gateway:
-          - {priority: "100", gateway: "192.168.214.1", health_check: {id: "1"}}
-          - {priority: "5", gateway: "192.168.224.1", health_check: {id: "1"}}
+          - { priority: "100", gateway: "192.168.214.1", health_check: [{id: "1"}] }
+          - { priority: "5", gateway: "192.168.224.1", health_check: [{id: "1"}] }
       network:
           - { dest: "10.10.0.0/16",
               gateway: [
@@ -153,9 +153,9 @@ from ansible.module_utils.basic import missing_required_lib
 from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
     make_module_args, try_except
 
+
 inner_interface_params = ['interface']
 inner_interface_args = make_module_args(inner_interface_params)
-
 inner_gateway_params = ['gateway']
 inner_gateway_args = make_module_args(inner_gateway_params)
 
@@ -166,7 +166,7 @@ inner_network_args = dict(
 )
 
 inner_health_check_args = dict(
-    id=dict(type='str', required=True)
+    id=dict(type="str", required=True)
 )
 
 inner_defaultgw_args = dict(

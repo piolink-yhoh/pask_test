@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (c) 2020, Piolink.Inc.
+# Copyright: (c) 2020, Piolink Inc.
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -229,7 +229,7 @@ EXAMPLES = r'''
       max_connection: "12"
       upload_bandwidth: "100000"
       download_bandwidth: "200000"
-      domain_filter: "1, 2"
+      domain_filter: "1"
       pool_size: "100"
       pool_age: "200"
       pool_reuse: "300"
@@ -253,9 +253,9 @@ RETURN = r'''
 #
 '''
 
+import os
 from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
     try_except, make_module_args
-import os
 
 
 inner_nat_param = [
@@ -271,7 +271,6 @@ inner_hc_args = dict(
     id=dict(type='str', required=True),
 )
 
-module_args = dict()
 module_args = dict(
     id=dict(type='str', required=True),
     rip=dict(type='str', required=True),
@@ -298,13 +297,15 @@ class PaskReal(PaskModule):
 
     @try_except
     def run(self):
-        url = os.path.join(self.url, self.module.params['id'])
         if self.module.params['state'] == "absent":
+            data = dict()
+            data['real'] = self.make_data(self.module.params)
             self.ok_error_msg['delete'] = ['EntryDoesNotExist']
-            resp = self.delete(url)
+            resp = self.delete(self.url, data)
         else:
             data = dict()
             data = self.make_data(self.module.params, include_inner=True)
+            url = os.path.join(self.url, self.module.params['id'])
             resp = self.put(url, data)
         self.resp = resp
 

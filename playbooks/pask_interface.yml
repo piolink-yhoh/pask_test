@@ -8,8 +8,8 @@
   tasks:
   - name: create interface ip
     pask_interface:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       name: "test_vlan"
@@ -25,8 +25,8 @@
 
   - name: delete interface ip
     pask_interface:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       name: "test_vlan"

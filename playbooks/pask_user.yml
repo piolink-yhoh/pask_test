@@ -8,8 +8,8 @@
   tasks:
   - name: Create User
     pask_user:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       name: "piolink"
@@ -20,8 +20,8 @@
 
   - name: Delete User
     pask_user:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       name: "piolink"

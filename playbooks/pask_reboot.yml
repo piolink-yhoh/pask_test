@@ -6,10 +6,10 @@
   - piolink_yhoh.pask_test
 
   tasks:
-  - name: Reboot PAS-K
+  - name: Reboot Config
     pask_reboot:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       verify: "yes"

@@ -6,10 +6,10 @@
   - piolink_yhoh.pask_test
 
   tasks:
-  - name: Create slb
+  - name: Create slb aaaa? ! @ $ % ^
     pask_slb:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       name: "slb_test"
@@ -18,10 +18,11 @@
           - { ip: "172.118.10.122" }
       priority: "25"
       nat_mode: "dnat"
+      lan_to_lan: "10.10.10.10/24"
       lb_method: "wlc"
       real:
-          - { id: "10", rport: "5512", status: "enable", graceful_shutdown: "disable" }
-          - { id: "14" }
+          - { id: "10", rport: "5512", status: "enable", graceful_shutdown: "disable"}
+          - id: "14"
       health_check:
           - "100"
           - "200"
@@ -30,19 +31,18 @@
           timer: "444"
       sticky:
           time: "4121"
-          source_subnet: "255.255.255.0"
+          source_subnet: "27"
       session_sync: "persistence"
       fail_skip: "inact"
-      keep_backup:
-          service: "disable"
-          real: "disable"
+      keep_backup: "disable"
       status: "disable"
+      snatip: "14.14.14.14"
       state: "present"
 
-  - name: Delete slb
+  - name: delete slb
     pask_slb:
-        prest_ip: "{{ansible_host}}"
-        prest_port: "{{ansible_port}}"
+        prest_ip: "{{ansible_ssh_host}}"
+        prest_port: "{{ansible_ssh_port}}"
         user_id: "{{user_id}}"
         user_pw: "{{user_pw}}"
         name: "slb_test"

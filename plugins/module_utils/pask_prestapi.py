@@ -7,12 +7,12 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 import os
-import base64
 try:
     import requests
     HAS_REQUESTS = True
 except ImportError:
     HAS_REQUESTS = False
+import base64
 
 from ansible.module_utils._text import to_bytes
 from ansible.module_utils.basic import AnsibleModule, missing_required_lib

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (c) 2020, Piolink.Inc.
+# Copyright: (c) 2020, Piolink Inc.
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -272,15 +272,25 @@ EXAMPLES = r'''
       port: "5004"
       retry: "2"
       timeout: "4"
+
+  - name: Delete health-check
+    pask_health_check:
+      prest_ip: "{{ansible_host}}"
+      prest_port: "{{ansible_port}}"
+      user_id: "{{user_id}}"
+      user_pw: "{{user_pw}}"
+      id: "500"
+      state: "absent"
 '''
 
 RETURN = r'''
 #
 '''
 
+import os
 from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
     make_module_args, try_except
-import os
+
 
 str_param_list = [
     'type', 'recover', 'timeout', 'interval', 'status', 'state', 'retry',

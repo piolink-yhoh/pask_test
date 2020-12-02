@@ -11,8 +11,7 @@ import json
 from functools import wraps
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six import iteritems
-from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.\
-    pask_prestapi import PrestApi
+from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_prestapi import PrestApi
 
 
 def make_module_args(param):

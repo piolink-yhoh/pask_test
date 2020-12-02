@@ -8,8 +8,8 @@
   tasks:
   - name: Create real
     pask_real:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       id: "101"
@@ -21,7 +21,7 @@
       max_connection: "12"
       upload_bandwidth: "100000"
       download_bandwidth: "200000"
-      domain_filter: "1, 2"
+      domain_filter: "1"
       pool_size: "100"
       pool_age: "200"
       pool_reuse: "300"
@@ -32,8 +32,8 @@
 
   - name: Delete real
     pask_real:
-      prest_ip: "{{ansible_host}}"
-      prest_port: "{{ansible_port}}"
+      prest_ip: "{{ansible_ssh_host}}"
+      prest_port: "{{ansible_ssh_port}}"
       user_id: "{{user_id}}"
       user_pw: "{{user_pw}}"
       id: "101"

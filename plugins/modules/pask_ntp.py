@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (c) 2020, Piolink.Inc.
+# Copyright: (c) 2020, Piolink Inc.
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -94,6 +94,7 @@ RETURN = r'''
 
 from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
     make_module_args, try_except
+
 
 mostouter_params = [
     'status', 'primary_server', 'secondary_server', 'minpoll',

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (c) 2020, Piolink.Inc.
+# Copyright: (c) 2020, Piolink Inc.
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -286,19 +286,7 @@ options:
     keep_backup:
         description:
             - Enter backup information.
-        type: dict
-
-        suboptions:
-            service:
-                description:
-                    - Enter how to handle the session of the backup service, When the master real service becomes operational again.
-                    - The value should be 'enable' or 'disable'.
-                type: str
-            real:
-                description:
-                    - Enter how to handle the session of the backup real server, When the master real server becomes operational again.
-                    - The value should be 'enable' or 'disable'.
-                type: str
+        type: str
     snatip:
         description:
             - Enter source nat ip address.
@@ -414,17 +402,18 @@ vip_inner_args = dict(
 )
 
 # real inner args
-real_inner_args = dict(
-    id=dict(type='str', required=True)
-)
 real_inner_param = [
     'rport', 'status', 'graceful_shutdown'
 ]
-real_inner_args.update(make_module_args(real_inner_param))
+real_inner_args = dict(
+    id=dict(type='str', required=True),
+)
+d = make_module_args(real_inner_param)
+real_inner_args.update(d)
 
 slow_start_inner_args = dict(
     rate=dict(type='str'),
-    timer=dict(type='str')
+    timer=dict(type='str'),
 )
 
 # sticky param
@@ -441,26 +430,20 @@ dynamic_proximity_inner_args = dict(
 
 # session_timeout inner_args
 session_timeout_params = [
-    'generic', 'icmp', 'udp', 'udp_stream', 'tcp_syn_sent', 'tcp_syn_recv',
-    'tcp_established', 'tcp_fin_wait', 'tcp_close_wait', 'tcp_last_ack',
-    'tcp_wait', 'tcp_close', 'tcp_unassured'
+    'generic', 'icmp', 'udp', 'udp_stream', 'tcp_syn_sent',
+    'tcp_syn_recv', 'tcp_established', 'tcp_fin_wait', 'tcp_close_wait',
+    'tcp_last_ack', 'tcp_wait', 'tcp_close', 'tcp_unassured'
 ]
 session_timeout_inner_args = make_module_args(session_timeout_params)
 
 # make filter args
-filter_inner_args = dict(
-    id=dict(type='str', required=True)
-)
 filter_param = [
     'dip', 'dport', 'protocol', 'sip', 'sport', 'status', 'type'
 ]
-filter_inner_args.update(make_module_args(filter_param))
-
-# make keep-backup args
-keep_backup_inner_args = dict(
-    service=dict(type='str'),
-    real=dict(type='str')
+filter_inner_args = dict(
+    id=dict(type='str', required=True)
 )
+filter_inner_args.update(make_module_args(filter_param))
 
 # make outermost of module_args
 module_args = dict(
@@ -473,15 +456,17 @@ module_args = dict(
     slow_start=dict(type='dict', options=slow_start_inner_args),
     dynamic_proximity=dict(type='dict', options=dynamic_proximity_inner_args),
     session_timeout=dict(type='dict', options=session_timeout_inner_args),
-    filter=dict(type='list', elements='dict', options=filter_inner_args),
-    keep_backup=dict(type='dict', options=keep_backup_inner_args)
+    filter=dict(type='list', elements='dict', options=filter_inner_args)
 )
 
 str_param_list = [
-    'priority', 'nat_mode', 'lan_to_lan', 'lb_method', 'session_sync',
-    'fail_skip', 'backup', 'status', 'snatip', 'state', 'session_timeout_mode',
+    'priority', 'nat_mode', 'lan_to_lan',
+    'lb_method', 'session_sync',
+    'fail_skip', 'backup', 'keep_backup', 'status',
+    'snatip', 'state', 'session_timeout_mode',
     'session_reset', 'active_nodest'
 ]
+
 module_args.update(make_module_args(str_param_list))
 
 name = 'slb'
