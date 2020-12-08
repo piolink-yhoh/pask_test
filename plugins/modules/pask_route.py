@@ -195,7 +195,7 @@ class PaskRoute(PaskModule):
     @try_except
     def run(self):
         interface_url = self.url.replace(name, 'interface')
-        resp = self.get(interface_url)
+        resp = self.prest.get(interface_url)
         resp_dict = json.loads(resp.text)
 
         if_list = self.get_if_and_ip(resp_dict['interface'])
@@ -209,7 +209,7 @@ class PaskRoute(PaskModule):
         else:
             data['network'].extend(route_data)
 
-        self.resp = self.put(self.url, data)
+        self.resp = self.prest.put(self.url, data)
 
     def get_if_and_ip(self, data):
         """

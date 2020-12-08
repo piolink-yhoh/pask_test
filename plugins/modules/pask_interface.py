@@ -249,9 +249,9 @@ class PaskInterface(PaskModule):
         url = os.path.join(self.url, self.module.params['name'])
         if self.module.params['state'] == 'absent':
             self.ok_error_msg['delete'] = ['There is no']
-            self.resp = self.delete(url, data)
+            self.resp = self.prest.delete(url, data)
         else:
-            self.resp = self.put(url, data)
+            self.resp = self.prest.put(url, data)
 
 
 def main():

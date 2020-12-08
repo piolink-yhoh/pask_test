@@ -291,7 +291,6 @@ import os
 from ansible_collections.piolink_yhoh.pask_test.plugins.module_utils.pask_module import PaskModule,\
     make_module_args, try_except
 
-
 str_param_list = [
     'type', 'recover', 'timeout', 'interval', 'status', 'state', 'retry',
     'sip', 'tip', 'uri', 'host', 'user_agent', 'status_code', 'expect',
@@ -322,11 +321,11 @@ class PaskHealthcheck(PaskModule):
             data = dict()
             url = os.path.join(self.url, self.module.params['id'])
             self.ok_error_msg['delete'] = ['EntryDoesNotExist']
-            self.resp = self.delete(url, data)
+            self.resp = self.prest.delete(url, data)
         else:
             data = self.make_data(self.module.params)
             url = os.path.join(self.url, self.module.params['id'])
-            self.resp = self.put(url, data)
+            self.resp = self.prest.put(url, data)
 
 
 def main():

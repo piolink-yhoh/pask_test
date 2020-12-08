@@ -15,17 +15,18 @@ except ImportError:
 import base64
 
 from ansible.module_utils._text import to_bytes
-from ansible.module_utils.basic import AnsibleModule, missing_required_lib
+from ansible.module_utils.basic import missing_required_lib
 
 
 class PrestApi(object):
-    def __init__(self):
+    def __init__(self, module):
         self.headers = {'Authorization': '',
                         'Content-Type': ''}
         self.used_method = list()
+        self.module = module
+
         if not HAS_REQUESTS:
-            AnsibleModule(argument_spec={}, check_invalid_arguments=False)\
-                .fail_json(msg=missing_required_lib('requests'))
+            self.module.fail_json(msg=missing_required_lib('requests'))
 
     def basic_auth(self, username, password):
         return "Basic %s" % base64.b64encode(to_bytes(

@@ -301,12 +301,12 @@ class PaskReal(PaskModule):
             data = dict()
             data['real'] = self.make_data(self.module.params)
             self.ok_error_msg['delete'] = ['EntryDoesNotExist']
-            resp = self.delete(self.url, data)
+            resp = self.prest.delete(self.url, data)
         else:
             data = dict()
             data = self.make_data(self.module.params, include_inner=True)
             url = os.path.join(self.url, self.module.params['id'])
-            resp = self.put(url, data)
+            resp = self.prest.put(url, data)
         self.resp = resp
 
 

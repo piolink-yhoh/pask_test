@@ -89,7 +89,7 @@ class PaskWritememory(PaskModule):
     def run(self):
         if self.module.params['verify'] == "yes":
             data = dict()
-            self.resp = self.post(self.url, data)
+            self.resp = self.prest.post(self.url, data)
 
 
 def main():

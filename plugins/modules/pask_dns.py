@@ -121,7 +121,7 @@ class PaskDns(PaskModule):
     @try_except
     def run(self):
         data = self.make_data(self.module.params, include_inner=True)
-        self.resp = self.put(self.url, data)
+        self.resp = self.prest.put(self.url, data)
 
 
 def main():

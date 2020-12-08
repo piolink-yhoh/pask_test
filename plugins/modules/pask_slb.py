@@ -482,13 +482,13 @@ class PaskSlb(PaskModule):
         if self.module.params['state'] == "absent":
             data[name] = {'name': self.module.params['name']}
             self.ok_error_msg['delete'] = ['EntryDoesNotExist']
-            self.resp = self.delete(self.url, data)
+            self.resp = self.prest.delete(self.url, data)
         else:
             data = self.make_data(self.module.params, include_inner=True)
             filter_data = self.make_filter_data(data)
             data['filter'] = filter_data
             url = os.path.join(self.url, self.module.params['name'])
-            self.resp = self.put(url, data)
+            self.resp = self.prest.put(url, data)
 
     def make_filter_data(self, data):
         # module do not have filter data in playbook script

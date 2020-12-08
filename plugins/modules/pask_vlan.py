@@ -142,10 +142,10 @@ class PaskVlan(PaskModule):
         url = os.path.join(self.url, self.module.params['name'])
         if self.module.params['state'] == "absent":
             self.ok_error_msg['delete'] = ['There is no vlan']
-            self.resp = self.delete(url)
+            self.resp = self.prest.delete(url)
         else:
             data = self.make_data(self.module.params)
-            self.resp = self.put(url, data)
+            self.resp = self.prest.put(url, data)
 
 
 def main():

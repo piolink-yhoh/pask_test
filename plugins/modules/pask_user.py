@@ -148,10 +148,10 @@ class PaskUser(PaskModule):
     def run(self):
         url = os.path.join(self.url, self.module.params['name'])
         if self.module.params['state'] == 'absent':
-            self.resp = self.delete(url)
+            self.resp = self.prest.delete(url)
         else:
             data = self.make_data(self.module.params, include_inner=True)
-            self.resp = self.put(url, data)
+            self.resp = self.prest.put(url, data)
 
 
 def main():

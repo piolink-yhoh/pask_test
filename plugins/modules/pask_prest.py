@@ -117,13 +117,13 @@ class PaskPrest(PaskModule):
             data = json.loads(self.module.params['data'])
 
         if self.module.params['method'] == 'get':
-            resp = self.get(url)
+            resp = self.prest.get(url)
         elif self.module.params['method'] == 'post':
-            resp = self.post(url, data)
+            resp = self.prest.post(url, data)
         elif self.module.params['method'] == 'put':
-            resp = self.put(url, data)
+            resp = self.prest.put(url, data)
         elif self.module.params['method'] == 'delete':
-            resp = self.delete(url, data)
+            resp = self.prest.delete(url, data)
 
         if resp is not None:
             self.resp = resp

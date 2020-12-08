@@ -98,7 +98,7 @@ class PaskHostname(PaskModule):
         resp = None
 
         data = self.make_data(self.module.params)
-        resp = self.put(self.url, data)
+        resp = self.prest.put(self.url, data)
         self.resp = resp
 
 

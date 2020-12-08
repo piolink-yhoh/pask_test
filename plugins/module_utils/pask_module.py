@@ -36,9 +36,8 @@ def try_except(func):
     return applicator
 
 
-class PaskModule(PrestApi):
+class PaskModule(object):
     def __init__(self, name, module_args):
-        super(PaskModule, self).__init__()
         self.module_args = module_args
         self.basic_module_args = dict(
             prest_ip=dict(type='str', required=True),
@@ -51,6 +50,8 @@ class PaskModule(PrestApi):
         self.path_name = name
         self.data_name = name
         self.init_ansible()
+        self.prest = PrestApi(self.module)
+        self.set_param()
         self.exclude_params = [
             'prest_ip', 'prest_port', 'state', 'user_id', 'user_pw'
         ]
@@ -73,7 +74,6 @@ class PaskModule(PrestApi):
         )
         self.result = result
         self.module = module
-        self.set_param()
 
         if self.module.check_mode:
             return self.result
@@ -81,7 +81,7 @@ class PaskModule(PrestApi):
     def set_param(self):
         self.user_id = self.module.params['user_id']
         self.user_pw = self.module.params['user_pw']
-        self.set_headers(self.user_id, self.user_pw)
+        self.prest.set_headers(self.user_id, self.user_pw)
         self.prefix_url = 'https://{0}:{1}/prestapi/v2/conf/'.format(
             self.module.params['prest_ip'], self.module.params['prest_port'])
 
@@ -123,15 +123,15 @@ class PaskModule(PrestApi):
         resp = None
         if self.module.params['state'] == "absent":
             data = self.make_data(self.module.params)
-            resp = self.delete(self.url, data)
+            resp = self.prest.delete(self.url, data)
         else:
             data = dict()
-            if self.is_exist(self.url, self.module.params['id']):
+            if self.prest.is_exist(self.url, self.module.params['id']):
                 data[self.data_name] = self.make_data(self.module.params)
-                resp = self.put(self.url, data)
+                resp = self.prest.put(self.url, data)
             else:
                 data[self.data_name] = self.make_data(self.module.params)
-                resp = self.post(self.url, data)
+                resp = self.prest.post(self.url, data)
         if resp is not None:
             self.result['message'] = resp.text
         else:
@@ -139,13 +139,13 @@ class PaskModule(PrestApi):
         self.resp = resp
 
     def is_ok_error_msg(self, msg):
-        if len(self.used_method) < 0:
+        if len(self.prest.used_method) < 0:
             return False
         if len(self.ok_error_msg.keys()) <= 0:
             return False
 
         for method, is_ok_msg in iteritems(self.ok_error_msg):
-            if method == self.used_method[-1]:
+            if method == self.prest.used_method[-1]:
                 for ok_msg in is_ok_msg:
                     if ok_msg in msg:
                         return True
